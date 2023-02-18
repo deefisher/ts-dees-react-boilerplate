@@ -12,7 +12,9 @@ app.get("*", (req, res) => {
 });
 app.listen(port, () => {
     console.warn('>>> WARNING: `npm start` IS FOR SERVING WHAT IS IN BUILD FOLDER');
+    console.log('========================================================');
     console.log('Server is up!');
+    console.log('========================================================');
     console.log('Check http://localhost:3001/ in browser if run locally.');
     console.log('========================================================');
     console.log('Run: `npm run dev` to develop locally');
