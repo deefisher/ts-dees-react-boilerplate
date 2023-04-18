@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppBar renders AppBar unchanged 1`] = `
+<div>
+  <div
+    class="StyledGrommet-sc-19lkkz7-0 ioQEen"
+  >
+    <div
+      class="StyledBox-sc-13pk1d4-0 bDSydy"
+    >
+      <span
+        class="StyledText-sc-1sadyjn-0 fBGZaZ"
+      >
+        My App
+      </span>
+    </div>
+  </div>
+</div>
+`;
