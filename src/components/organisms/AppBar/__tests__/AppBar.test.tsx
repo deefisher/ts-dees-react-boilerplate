@@ -1,17 +1,13 @@
 import { render } from '@testing-library/react';
 import { AppBar } from '..';
-import { Grommet, Page, Text } from 'grommet';
+import { AppProvider } from '../../../../App';
 
 describe('AppBar', () => {
     it('renders AppBar unchanged', () => {
         const { container } = render(
-            <Grommet>
-                <Page>
-                    {/* <AppBar> */}
-                    <Text size="large">My App</Text>
-                    {/* </AppBar> */}
-                </Page>
-            </Grommet>,
+            <AppProvider>
+                <AppBar />
+            </AppProvider>,
         );
         expect(container).toMatchSnapshot();
     });
