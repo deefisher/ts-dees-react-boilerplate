@@ -1,6 +1,9 @@
 import { Grommet } from 'grommet';
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { theme } from '../styles';
+import { Provider, useDispatch } from 'react-redux';
+import store from '../redux/store';
+import { setThemeModeAction } from '../redux/actions';
 
 interface IAppContext {
     /** Is theme in dark mode or not */
@@ -10,9 +13,14 @@ interface IAppContext {
 }
 const AppContext = createContext<IAppContext>({ dark: false, setDark: () => {} });
 
-/** Provides App context to all children */
-export const AppProvider = ({ children }: { children: ReactNode }) => {
+const ContextProvider = ({ children }: { children: ReactNode }) => {
     const [dark, setDark] = useState(true);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setThemeModeAction(dark ? 'dark' : 'light'));
+    }, [dark, dispatch]);
 
     return (
         <AppContext.Provider value={{ dark, setDark }}>
@@ -22,6 +30,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         </AppContext.Provider>
     );
 };
+
+/** Provides App context to all children */
+export const AppProvider = ({ children }: { children: React.ReactNode }) => (
+    <Provider store={store}>
+        <ContextProvider>{children}</ContextProvider>
+    </Provider>
+);
 
 export const useApp = () => {
     const context = useContext(AppContext);
