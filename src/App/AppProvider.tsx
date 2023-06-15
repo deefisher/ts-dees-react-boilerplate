@@ -2,8 +2,8 @@ import { Grommet } from 'grommet';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { theme } from '../styles';
 import { Provider, useDispatch } from 'react-redux';
-import store from '../redux/store';
 import { setThemeModeAction } from '../redux/actions';
+import { store } from '../redux';
 
 interface IAppContext {
     /** Is theme in dark mode or not */

@@ -1,12 +1,14 @@
-//redux
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
-import thunkmiddleware from 'redux-thunk'; // middelware that waits to see if any actions return a function instead of an object. e it also allow for ajax redux actions
+import thunkmiddleware from 'redux-thunk';
 
-//redux dev tools
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkmiddleware)));
+const composeEnhancers =
+    (typeof window !== 'undefined' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-export default store;
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkmiddleware)));
